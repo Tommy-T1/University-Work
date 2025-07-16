@@ -1,0 +1,53 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Register</title>
+</head>
+<body>
+
+<div class="container offWhite-outlined-block">
+    <div class="register-container">
+        <h1>Register for an Account</h1>
+        
+        <form action="register.php" method="post" id="registerForm">
+            <div class="form-group">
+                <label for="email" class="label">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username" class="label">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="label">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role" class="label">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="admin">Admin</option>
+                    <option value="organizer">Organizer</option>
+                    <option value="participant">Participant</option>
+                </select>
+            </div>
+
+            <button type="submit" class="register-button">Register</button>
+        </form>
+    </div>
+
+    <div class="login-container">
+        <p class="already-registered">Already registered? <a href="login.html">Login here</a></p>
+    </div>
+</div>
+
+</body>
+</html>
+

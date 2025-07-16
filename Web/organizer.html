@@ -1,0 +1,100 @@
+<?php
+// Assuming you have a session management system in place
+// Make sure the user accessing this page has the 'organizer' role
+session_start();
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'organizer') {
+    header("Location: login.html");
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Organizer Page</title>
+</head>
+<body>
+
+<div class="container outlined-block">
+    <div class="organizer-container">
+        <h1>Welcome, <?php echo $_SESSION['username']; ?> (Organizer)</h1>
+
+        <div class="organizer-actions">
+            <button onclick="loadOrganizerContent('organizer-events.php')">View Events</button>
+            <button onclick="loadOrganizerContent('organizer-manage.php')">Manage Participants</button>
+            <div class="logout-container">
+                <form action="logout.php" method="post">
+                    <button type="submit" class="btn-logout">Logout</button>
+                </form>
+            </div>       
+         </div>
+
+        <div id="organizer-content">
+            <!-- Organizer content will be dynamically loaded here based on actions -->
+        </div>
+    </div>
+</div>
+
+<script src="organizer.js"></script>
+
+</body>
+</html>
+
+
+
+
+<!--The code should look more like this but since again since we're not connected to database the code above is a place holder just to show how it looks 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Organizer Page</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="organizer-container">
+        <h1>Welcome, <?php echo $_SESSION['username']; ?> (Organizer)</h1>
+
+        <div class="organizer-actions">
+            <button onclick="loadOrganizerContent('view_events')">View Events</button>
+            <button onclick="loadOrganizerContent('manage_participants')">Manage Participants</button>
+            <div class="logout-container">
+                <form action="logout.php" method="post">
+                    <button type="submit" class="btn-logout">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="organizer-content">
+        </div>
+    </div>
+</div>
+
+<script>
+function loadOrganizerContent(action) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            document.getElementById('organizer-content').innerHTML = response;
+        }
+    };
+
+    xhr.open('GET', 'fetch_data.php?action=' + action, true);
+    xhr.send();
+}
+</script>
+
+</body>
+</html>
+
+
+-->

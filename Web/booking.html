@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container outlined-block">
+        <header>
+            <h1>Welcome to Event Booking</h1>
+            <p>Logged in as: <span id="loggedInUser"></span></p>
+        </header>
+
+        <div id="events-container">
+
+            <h2>Available Events</h2>
+            <!--Here the events should be taken from the database but since it's not connected these are placeholders-->
+
+            <div class="event">
+                <img src="download.jpg" alt="Event 1 Image" class="event-image">
+                <div class="event-details">
+                    <h3>Event 1</h3>
+                    <p>This is an event placeholder</p>
+                    <button onclick="bookEvent('Event 1')">Book Now</button>
+                </div>
+            </div>
+
+            <div class="event">
+                <img src="download (1).jpg" alt="Event 2 Image" class="event-image">
+                <div class="event-details">
+                    <h3>Event 2</h3>
+                    <p>This is an event placeholder</p>
+                    <button onclick="bookEvent('Event 2')">Book Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout button with CSS styling -->
+        <div class="logout-container">
+            <form action="logout.php" method="post">
+                <button type="submit" class="btn-logout">Logout</button>
+            </form>
+        </div>
+        <script src="script.js"></script>
+
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const userEmail = urlParams.get('user');
+    
+            document.getElementById('loggedInUser').innerText = userEmail;
+    
+            function bookEvent(eventName) {
+                alert(`Event "${eventName}" booked!`);
+            }
+        </script>
+</body>
+</html>
+
+
+
+<!--the code should be more like this but this code also has 
+    place holders that will stay because we don't want connections
+    to be messed up 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container outlined-block">
+        <header>
+            <h1>Welcome to Event Booking</h1>
+            <p>Logged in as: <span id="loggedInUser"></span></p>
+        </header>
+
+        <div id="events-container">
+
+            <h2>Available Events</h2>
+           
+            <div id="available-events"></div>
+
+        </div>
+    </div>
+
+    <script src="booking.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const userEmail = urlParams.get('user');
+
+        document.getElementById('loggedInUser').innerText = userEmail;
+
+        // Fetch and display available events
+        fetch('/available-events')
+            .then(response => response.json())
+            .then(data => displayAvailableEvents(data));
+
+        function displayAvailableEvents(events) {
+            const eventsContainer = document.getElementById('available-events');
+
+            events.forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.classList.add('event');
+                eventDiv.setAttribute('data-event-name', event.name);
+
+                const img = document.createElement('img');
+                img.src = event.image;
+                img.alt = `Event ${event.name} Image`;
+                img.classList.add('event-image');
+
+                const detailsDiv = document.createElement('div');
+                detailsDiv.classList.add('event-details');
+
+                const titleH3 = document.createElement('h3');
+                titleH3.textContent = event.name;
+
+                const descriptionP = document.createElement('p');
+                descriptionP.textContent = event.description;
+
+                const bookButton = document.createElement('button');
+                bookButton.textContent = 'Book Now';
+                bookButton.onclick = function () {
+                    bookEvent(event.name);
+                };
+
+                detailsDiv.appendChild(titleH3);
+                detailsDiv.appendChild(descriptionP);
+                detailsDiv.appendChild(bookButton);
+
+                eventDiv.appendChild(img);
+                eventDiv.appendChild(detailsDiv);
+
+                eventsContainer.appendChild(eventDiv);
+            });
+        }
+
+        function bookEvent(eventName) {
+            alert(`Event "${eventName}" booked!`);
+
+            // Send a request to the server to insert the booked event into the database
+            fetch(`/book-event?user=${userEmail}&event=${eventName}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Log the response from the server
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
+
+-->

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login</title>
+</head>
+<body>
+
+<div class="container offWhite-outlined-block">
+    <div class="login-container">
+        <h1>Login to Your Account</h1>
+        
+        <form action="login.php" method="post" id="loginForm">
+            <div class="form-group">
+                <label for="username" class="label">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="label">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="login-button">Login</button>
+        </form>
+
+        <p class="forgot-password"><a href="forgot_password.html">Forgot your password?</a></p>
+    </div>
+
+    <div class="register-container">
+        <p class="not-registered">Not registered? <a href="register.html">Register here</a></p>
+    </div>
+</div>
+
+</body>
+</html>

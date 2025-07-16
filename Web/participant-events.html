@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Participant Events</title>
+</head>
+<body>
+
+<div class="events-container outlined-block" style="text-align: center; transform: translate(145%,125%);">
+    <h2>Upcoming Events</h2>
+    <div class="event">
+        <div class="event-title">Event 1</div>
+        <div class="event-date">Date: March 1st, 2024</div>
+        <div class="event-description">This is an event placeholder</div>
+    </div>
+
+    <div class="event">
+        <div class="event-title">Event 2</div>
+        <div class="event-date">Date: October 15th, 2024</div>
+        <div class="event-description">This is an event placeholder.</div>
+    </div>
+
+    <div class="back-button" href="booking.html">
+        <button onclick="location.href='booking.html'";>Back</button>
+    </div>
+
+    <!-- Logout button -->
+    <div class="logout-container">
+        <button class="logout-text"><a href="logout.php">Logout</a></button>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+<!--The Code Should Look Like This 
+but since we didn't connect it to a server we implemented the code above 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Participant Events</title>
+</head>
+<body>
+
+    <div class="events-container outlined-block" style="text-align: center; transform: translate(145%,125%);">
+        <h2>Upcoming Events</h2>
+        <div id="events-list"></div>
+
+        <div class="back-button">
+            <button onclick="loadParticipantContent('booking.html')">Back</button>
+        </div>
+    </div>
+
+    <script>
+        // Fetch events from the server
+        fetch('/participate-events') // Updated endpoint
+            .then(response => response.json())
+            .then(data => displayEvents(data));
+
+        // Function to display events
+        function displayEvents(events) {
+            const eventsContainer = document.getElementById('events-list');
+
+            events.forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.classList.add('event');
+
+                const titleDiv = document.createElement('div');
+                titleDiv.classList.add('event-title');
+                titleDiv.textContent = event.title;
+
+                const dateDiv = document.createElement('div');
+                dateDiv.classList.add('event-date');
+                dateDiv.textContent = `Date: ${event.date}`;
+
+                const descriptionDiv = document.createElement('div');
+                descriptionDiv.classList.add('event-description');
+                descriptionDiv.textContent = event.description;
+
+                eventDiv.appendChild(titleDiv);
+                eventDiv.appendChild(dateDiv);
+                eventDiv.appendChild(descriptionDiv);
+
+                eventsContainer.appendChild(eventDiv);
+            });
+        }
+    </script>
+
+</body>
+</html>
+
+-->
